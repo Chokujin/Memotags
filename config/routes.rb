@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'sessions/new'
-  get 'sessions/create'
-  get 'sessions/destroy'
   root to: 'toppages#index'
   
   get 'login', to: 'sessions#new'
@@ -11,20 +8,11 @@ Rails.application.routes.draw do
 
   get 'signup', to: 'users#new'
 
-  get 'memos/new'
-  get 'memos/create'
-  get 'memos/index'
-  get 'memos/show'
-  get 'memos/destroy'
-  get 'memos/edit'
-  get 'memos/update'
+  get 'calender', to: 'memos#calender'
 
-  get 'users/index'
-  get 'users/show'
-  get 'users/new'
-  get 'users/create'
 
-  get 'signup', to: 'users#new'
-  
-  resources :users, only: [:index, :show, :new, :create]
+  resources :users, only: [:new, :create]
+  resources :memos, only: [:create, :show, :edit, :update, :destroy]
+  #resources :calenders, only: [:index]
+
 end

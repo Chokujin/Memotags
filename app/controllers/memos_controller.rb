@@ -19,4 +19,8 @@ class MemosController < ApplicationController
 
   def update
   end
+  
+  def calender
+  end
+  
 end

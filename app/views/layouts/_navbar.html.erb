@@ -9,11 +9,11 @@
       <ul class="navbar-nav mr-auto"></ul>
       <ul class="navbar-nav">
         <% if logged_in? %>
-          <li class="nav-item"><%= link_to 'Users', users_path, class: 'nav-link' %></li>
           <li class="nav-item dropdown">
+            <li class="nav-item"><%= link_to '追加/一覧', root_path, class: 'nav-link' %></li>
+            <li class="nav-item"><%= link_to 'カレンダー表示', calender_path, class: 'nav-link' %></li>
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
             <ul class="dropdown-menu dropdown-menu-right">
-              <li class="dropdown-item"><%= link_to 'My profile', user_path(current_user) %></li>
               <li class="dropdown-divider"></li>
               <li class="dropdown-item"><%= link_to 'Logout', logout_path, method: :delete %></li>            </ul>
           </li>

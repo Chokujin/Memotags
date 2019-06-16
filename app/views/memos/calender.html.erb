@@ -1,0 +1,67 @@
+
+<h1>カレンダー</h1>
+    <%# 本日の日付 %>
+    <p><%= Time.now %></p>
+    <% t=Date.today %>
+
+    <%# 曜日配列 %>
+    <% wday =%w(Sun Mon Tue Wed Thr Fri Sat) %>
+
+    <%# 月初の曜日取得 %>
+    <% startmonth=Date.new(t.year,t.month, 1) %>
+    <% w=startmonth.wday %>
+
+    <%# 月末日取得 %>
+    <% endmonth=Date.new(t.year,t.month, -1) %>
+    <% endmonth.day %>
+
+<p>前の月  <%= link_to startmonth.prev_month %>月</p>
+<p>次の月  <%= link_to startmonth.next_month %>月</p>
+
+
+<ul class="list-unstyled">
+  <table class="table table-border">
+    <thead>
+      <tr>
+        <th><%= wday[0] %></th>
+        <th><%= wday[1] %></th>
+        <th><%= wday[2] %></th>
+        <th><%= wday[3] %></th>
+        <th><%= wday[4] %></th>
+        <th><%= wday[5] %></th>
+        <th><%= wday[6] %></th>
+      </tr>
+    </thead>
+      <tbody>
+      <%# カレンダー1列目 %>
+      <tr>
+        <% if w == 0 %>
+          <% (1..7).each do |num| %>
+            <td><%= num %></td>
+          <% end %>
+        <% end %>
+        <% if w >= 1 %>
+          <% (1..w).each do |num| %>
+            <td><%= "" %></td>
+          <% end %>
+          <% (1..7-w).each do |num| %>
+            <td><%= num %></td>
+          <% end %>
+        <% end %>
+        <% w2 = 7-w+1 %>
+      </tr>
+      
+      <%# カレンダー2列目以降 %>
+      
+      <% (1..5).each do |i| %>
+        <tr>
+          <% (w2..w2+6).each do |num| %>
+            <% if w2 <= endmonth.day %>
+              <td><%= num %></td>
+              <% w2=num+1 %>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+</ul>
