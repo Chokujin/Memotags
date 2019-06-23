@@ -1,15 +1,23 @@
 class MemosController < ApplicationController
+
+  before_action :set_memo, only:[:show, :edit, :update ] 
+
   def new
+    @memo = Memo.new
   end
 
   def create
     @memo = current_user.memos.build(memo_params)
+    spmemo = @memo.content.split("#")
+    @memo.content = spmemo[0]
+    @memo.tags.build(name: spmemo[1])
+
     if @memo.save
-      flash[:success] = 'タスクを登録しました。'
+      flash[:success] = 'メモ#タグを登録しました。'
       redirect_to root_url
     else
       @memos = current_user.memos.order(id: :desc).page(params[:page])
-      flash.now[:danger] = 'タスクの登録に失敗しました。'
+      flash.now[:danger] = 'メモ#タグの登録に失敗しました。'
       render 'toppages/index'
     end
   end
@@ -18,6 +26,7 @@ class MemosController < ApplicationController
   end
 
   def show
+
   end
 
   def destroy
@@ -51,6 +60,10 @@ class MemosController < ApplicationController
     unless @memo
       redirect_to root_url
     end
+  end
+  
+  def set_memo
+    @memo = Memo.find(params[:id])
   end
   
 end

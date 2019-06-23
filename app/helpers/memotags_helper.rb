@@ -1,0 +1,2 @@
+module MemotagsHelper
+end

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'memotags/create'
+  get 'memotags/destroy'
+  get 'tags/create'
+  get 'tags/destroy'
   root to: 'toppages#index'
   
   get 'login', to: 'sessions#new'
